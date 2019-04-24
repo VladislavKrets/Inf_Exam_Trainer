@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Exam</title>
+    <link rel="stylesheet" href="../static/index.css" th:href="@{/index.css}">
+    <script src="../static/jquery-3.4.0.js" th:src="@{/jquery-3.4.0.js}"></script>
+</head>
+<body>
+    <div class="nav">
+        <div class="menu">
+            <a href="#">Информатика</a>
+            <a href="/reboot">Заново</a>
+            <a href="/stop">Остановить сервер</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="question" th:utext="${question}">
+
+        </div>
+        <div class="answer">
+            <form action="/">
+                <div th:utext="${answer}">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
