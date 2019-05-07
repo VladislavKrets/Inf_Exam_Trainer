@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+  <head>
+	  <link href="../static/styles.css" rel="stylesheet" th:href="@{/styles.css}">
+	  <script src="../static/jquery-3.4.0.js" th:src="@{/jquery-3.4.0.js}"></script>
+  </head>
+  <body>
+
+	<div class="header">
+	  <div class="menu">
+		  <a href="/">Информатика</a>
+		  <a href="/physics">Физика</a>
+		  <a href="/reboot">Заново</a>
+		  <a href="/stop">Остановить сервер</a>
+	  </div>
+	</div>
+	<div class="question">
+		<img th:src="@{${path0}}"/>
+		<img th:src="@{${path1}}"/>
+	</div>
+    <div th:utext="${line}">
+
+	</div>
+  </body>
+</html>		

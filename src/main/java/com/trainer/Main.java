@@ -4,7 +4,16 @@ import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableMBeanExport;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +21,8 @@ import java.io.InputStream;
 import java.sql.*;
 
 @SpringBootApplication
-public class Main {
+public class Main extends SpringBootServletInitializer {
+    private static Class<Main> application = Main.class;
     public static Connection connection;
     public static Statement statement;
 
@@ -20,9 +30,14 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(application);
+    }
+
     private static void parseBase() throws ClassNotFoundException, IOException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        String fileName = "Baza_testov-IIS_Zhukovskogo.doc";
+        String fileName = "exam";
         InputStream fis = new FileInputStream(fileName);
         POIFSFileSystem fs = new POIFSFileSystem(fis);
         HWPFDocument doc = new HWPFDocument(fs);
@@ -34,6 +49,7 @@ public class Main {
             addToDb(table);
         }
     }
+
 
     private static void addToDb(Table table) throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:dbExam");
