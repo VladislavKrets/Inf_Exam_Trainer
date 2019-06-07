@@ -20,8 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 
+@EnableAutoConfiguration
 @SpringBootApplication
-public class Main extends SpringBootServletInitializer {
+public class Main extends SpringBootServletInitializer{
     private static Class<Main> application = Main.class;
     public static Connection connection;
     public static Statement statement;
@@ -30,10 +31,6 @@ public class Main extends SpringBootServletInitializer {
         SpringApplication.run(Main.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(application);
-    }
 
     private static void parseBase() throws ClassNotFoundException, IOException, SQLException {
         Class.forName("org.sqlite.JDBC");
